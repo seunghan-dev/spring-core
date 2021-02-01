@@ -9,13 +9,16 @@ import com.example.core.order.OrderService;
 import com.example.core.order.OrderServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderServiceTest {
+    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
-    MemberService memberService = new MemberServiceImpl();
-    OrderService orderService = new OrderServiceImpl();
+    MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+    OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
 
     @Test
     void createOrder() {
